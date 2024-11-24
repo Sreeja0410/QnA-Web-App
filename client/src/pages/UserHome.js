@@ -173,7 +173,7 @@ const UserHome = () => {
                 },
                 body: JSON.stringify({
                     postId,
-                    text: commentText  // This matches the Comment model's 'text' field
+                    text: commentText
                 })
             });
 
@@ -182,7 +182,7 @@ const UserHome = () => {
                 throw new Error(errorData.error || 'Failed to add comment');
             }
 
-            await fetchPosts(); // Refresh posts to show new comment
+            await fetchPosts();
         } catch (error) {
             console.error('Comment error:', error);
             setError(error.message);
@@ -208,7 +208,6 @@ const UserHome = () => {
                 throw new Error('Failed to delete post');
             }
 
-            // Refresh posts after deletion
             fetchPosts();
         } catch (error) {
             console.error('Delete error:', error);
@@ -233,11 +232,11 @@ const UserHome = () => {
                 throw new Error(errorData.error || 'Failed to update post');
             }
 
-            await fetchPosts(); // Refresh posts after successful edit
+            await fetchPosts();
         } catch (error) {
             console.error('Edit error:', error);
             setError(error.message);
-            throw error; // Propagate error to PostCard component
+            throw error;
         }
     };
 

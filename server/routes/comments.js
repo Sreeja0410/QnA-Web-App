@@ -17,7 +17,7 @@ router.post('/:id/like', async (req, res) => {
         const userIndex = comment.likes.indexOf(req.user.userId);
         if (userIndex === -1) {
             comment.likes.push(req.user.userId);
-            // Remove from dislikes if exists
+            
             const dislikeIndex = comment.dislikes.indexOf(req.user.userId);
             if (dislikeIndex > -1) {
                 comment.dislikes.splice(dislikeIndex, 1);
@@ -44,7 +44,7 @@ router.post('/:id/dislike', async (req, res) => {
         const userIndex = comment.dislikes.indexOf(req.user.userId);
         if (userIndex === -1) {
             comment.dislikes.push(req.user.userId);
-            // Remove from likes if exists
+            
             const likeIndex = comment.likes.indexOf(req.user.userId);
             if (likeIndex > -1) {
                 comment.likes.splice(likeIndex, 1);
@@ -60,7 +60,7 @@ router.post('/:id/dislike', async (req, res) => {
     }
 });
 
-// Add this route to create comments
+
 router.post('/', async (req, res) => {
     try {
         const { postId, text } = req.body;
@@ -83,12 +83,8 @@ router.post('/', async (req, res) => {
         });
 
         await comment.save();
-
-        // Add comment to post's comments array
         post.comments.push(comment._id);
         await post.save();
-
-        // Populate user info before sending response
         await comment.populate('user', 'name');
 
         res.status(201).json(comment);

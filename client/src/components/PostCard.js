@@ -10,9 +10,6 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
     const [isEditing, setIsEditing] = useState(false);
     const [editedQuestion, setEditedQuestion] = useState(post.question);
     const [editedTag, setEditedTag] = useState(post.tag);
-    
-    // Debug log to check post data
-    console.log('Post data:', post);
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
@@ -51,8 +48,6 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
             if (!response.ok) {
                 throw new Error('Failed to like comment');
             }
-
-            // Refresh the post to get updated comments
             onRefresh();
         } catch (error) {
             console.error('Like comment error:', error);
@@ -73,8 +68,6 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
             if (!response.ok) {
                 throw new Error('Failed to dislike comment');
             }
-
-            // Refresh the post to get updated comments
             onRefresh();
         } catch (error) {
             console.error('Dislike comment error:', error);
@@ -94,7 +87,6 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
             setIsEditing(false);
         } catch (error) {
             console.error('Edit error:', error);
-            // You might want to show this error to the user
             alert(error.message);
         }
     };

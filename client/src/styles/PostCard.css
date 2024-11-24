@@ -100,7 +100,7 @@
 .comments-list {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem; /* Reduced gap between comments */
+    gap: 0.2rem;
 }
 
 .comment-form {
@@ -110,7 +110,7 @@
 .comment-input-wrapper {
     display: flex;
     align-items: center;
-    border: 1px solid #cfd9de;  /* Twitter border color */
+    border: 1px solid #cfd9de;
     border-radius: 16px;
     padding: 0.4rem;
     background: white;
@@ -149,7 +149,7 @@
 }
 
 .comment-submit-btn:hover:not(:disabled) {
-    background-color: #e8f5fe;  /* Light Twitter blue */
+    background-color: #e8f5fe;
 }
 
 .comment-submit-btn:disabled {
@@ -212,19 +212,19 @@
 }
 
 .edit-btn {
-    color: #1da1f2;  /* Twitter blue */
+    color: #1da1f2;
 }
 
 .edit-btn:hover {
-    background-color: rgba(29, 161, 242, 0.1);  /* Light blue background */
+    background-color: rgba(29, 161, 242, 0.1);
 }
 
 .delete-btn {
-    color: #dc3545;  /* Red color */
+    color: #dc3545;
 }
 
 .delete-btn:hover {
-    background-color: rgba(220, 53, 69, 0.1);  /* Light red background */
+    background-color: rgba(220, 53, 69, 0.1);
 }
 
 /* Make icons the same size */

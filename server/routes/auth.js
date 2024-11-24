@@ -24,7 +24,7 @@ router.post('/signup', async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            role: 'user' // Add default role
+            role: 'user' 
         });
 
         await newUser.save();

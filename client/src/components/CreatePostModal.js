@@ -7,7 +7,7 @@ const CreatePostModal = ({ onClose, onSubmit }) => {
         tag: ''
     });
     const [charCount, setCharCount] = useState(0);
-    const maxChars = 500; // Maximum characters for question
+    const maxChars = 500; 
 
     const handleQuestionChange = (e) => {
         const text = e.target.value;

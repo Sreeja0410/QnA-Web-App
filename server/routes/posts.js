@@ -2,21 +2,14 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
-
-// Apply auth middleware to all routes
 router.use(authMiddleware);
 
 // Get all approved posts
 router.get('/approved', async (req, res) => {
     try {
         console.log('Fetching approved posts');
-        
-        // Create base query for approved posts
         let query = { status: 'approved' };
-        
-        // Add tag filter if search tag is provided
         if (req.query.tag) {
-            // Case-insensitive search for tags that include the search term
             query.tag = new RegExp(req.query.tag, 'i');
             console.log('Searching for tag:', req.query.tag);
         }
@@ -98,9 +91,6 @@ router.post('/', async (req, res) => {
             tag,
             status: 'pending'
         });
-
-        console.log('New post object:', post); 
-        
         await post.save();
         res.status(201).json(post);
     } catch (error) {
@@ -114,20 +104,16 @@ router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findOne({
             _id: req.params.id,
-            user: req.user.userId // Ensure the user owns the post
+            user: req.user.userId 
         });
 
         if (!post) {
             return res.status(404).json({ error: 'Post not found or unauthorized' });
         }
-
-        // Update only allowed fields
         post.question = req.body.question;
         post.tag = req.body.tag;
 
         await post.save();
-
-        // Return the updated post with populated fields
         const updatedPost = await Post.findById(post._id)
             .populate('user', 'name')
             .populate({
@@ -156,7 +142,6 @@ router.post('/:id/like', async (req, res) => {
         const userIndex = post.likes.indexOf(req.user.userId);
         if (userIndex === -1) {
             post.likes.push(req.user.userId);
-            // Remove from dislikes if exists
             const dislikeIndex = post.dislikes.indexOf(req.user.userId);
             if (dislikeIndex > -1) {
                 post.dislikes.splice(dislikeIndex, 1);
@@ -183,7 +168,6 @@ router.post('/:id/dislike', async (req, res) => {
         const userIndex = post.dislikes.indexOf(req.user.userId);
         if (userIndex === -1) {
             post.dislikes.push(req.user.userId);
-            // Remove from likes if exists
             const likeIndex = post.likes.indexOf(req.user.userId);
             if (likeIndex > -1) {
                 post.likes.splice(likeIndex, 1);
@@ -199,12 +183,11 @@ router.post('/:id/dislike', async (req, res) => {
     }
 });
 
-// Add this route to handle post deletion
 router.delete('/:id', async (req, res) => {
     try {
         const post = await Post.findOne({
             _id: req.params.id,
-            user: req.user.userId // Ensure the user owns the post
+            user: req.user.userId 
         });
 
         if (!post) {
@@ -221,7 +204,6 @@ router.delete('/:id', async (req, res) => {
 // Approve a post
 router.post('/:id/approve', authMiddleware, async (req, res) => {
     try {
-        // Check if user is admin
         if (req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Only admins can approve posts' });
         }
@@ -237,8 +219,6 @@ router.post('/:id/approve', authMiddleware, async (req, res) => {
 
         post.status = 'approved';
         await post.save();
-
-        // Return updated post with populated fields
         const updatedPost = await Post.findById(post._id)
             .populate('user', 'name')
             .populate({
@@ -259,11 +239,10 @@ router.post('/:id/approve', authMiddleware, async (req, res) => {
 // Reject a post
 router.post('/:id/reject', authMiddleware, async (req, res) => {
     try {
-        // Check if user is admin
+        
         if (req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Only admins can reject posts' });
         }
-
         const post = await Post.findById(req.params.id);
         if (!post) {
             return res.status(404).json({ error: 'Post not found' });
@@ -275,8 +254,6 @@ router.post('/:id/reject', authMiddleware, async (req, res) => {
 
         post.status = 'rejected';
         await post.save();
-
-        // Return updated post with populated fields
         const updatedPost = await Post.findById(post._id)
             .populate('user', 'name')
             .populate({
@@ -297,7 +274,6 @@ router.post('/:id/reject', authMiddleware, async (req, res) => {
 // Get all pending posts (admin only)
 router.get('/pending', authMiddleware, async (req, res) => {
     try {
-        // Check if user is admin
         if (req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Only admins can view all pending posts' });
         }

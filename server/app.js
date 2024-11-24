@@ -8,7 +8,6 @@ require('./models/User');
 require('./models/Post');
 require('./models/Comment');
 require('./models/Admin');
-require('./routes/comments');
 
 
 const { authMiddleware } = require('./middleware/authMiddleware');
