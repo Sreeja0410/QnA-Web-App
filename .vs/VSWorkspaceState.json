@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\pages",
+    "\\client\\src\\styles",
+    "\\server",
+    "\\server\\middleware",
+    "\\server\\models",
+    "\\server\\routes"
+  ],
+  "SelectedNode": "\\client\\src\\components\\UserLogin.js",
+  "PreviewInSolutionExplorer": false
+}
