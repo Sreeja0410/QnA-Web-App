@@ -19,7 +19,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ["https://qna-web-app-client.vercel.app/"],
+    origin: ["https://qna-web-app-client.vercel.app"],
     methods: ["POST","GET"],
     credentials: true
 }));
