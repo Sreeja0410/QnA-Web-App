@@ -37,7 +37,7 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
     const handleCommentLike = async (commentId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/comments/${commentId}/like`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/comments/${commentId}/like`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -57,7 +57,7 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
     const handleCommentDislike = async (commentId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/comments/${commentId}/dislike`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/comments/${commentId}/dislike`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
