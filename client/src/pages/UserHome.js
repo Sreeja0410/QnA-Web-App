@@ -65,7 +65,7 @@ const UserHome = () => {
                 endpoint = `approved?tag=${encodeURIComponent(searchTag.trim())}`;
             }
 
-            const response = await fetch(`http://localhost:5000/api/posts/${endpoint}`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/posts/${endpoint}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ const UserHome = () => {
         try {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
-            const response = await fetch('http://localhost:5000/api/posts', {
+            const response = await fetch('https://qna-web-app.vercel.app/api/posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const UserHome = () => {
     const handleLike = async (postId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}/like`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -143,7 +143,7 @@ const UserHome = () => {
     const handleDislike = async (postId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/posts/${postId}/dislike`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}/dislike`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -165,7 +165,7 @@ const UserHome = () => {
     const handleComment = async (postId, commentText) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/comments', {
+            const response = await fetch('https://qna-web-app.vercel.app/api/comments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ const UserHome = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -218,7 +218,7 @@ const UserHome = () => {
     const handleEditPost = async (postId, editData) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
