@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard';
 import CreatePostModal from '../components/CreatePostModal';
 import { FaPlus } from 'react-icons/fa';
 import '../styles/UserHome.css';
+import { API_BASE_URL } from '../config/api';
 
 const UserHome = () => {
     const { userId } = useParams();
@@ -65,7 +66,7 @@ const UserHome = () => {
                 endpoint = `approved?tag=${encodeURIComponent(searchTag.trim())}`;
             }
 
-            const response = await fetch(`https://qna-web-app.vercel.app/posts/${endpoint}`, {
+            const response = await fetch(`${API_BASE_URL}/posts/${endpoint}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -92,7 +93,7 @@ const UserHome = () => {
         try {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
-            const response = await fetch('https://qna-web-app.vercel.app/api/posts', {
+            const response = await fetch(`${API_BASE_URL}/posts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +122,7 @@ const UserHome = () => {
     const handleLike = async (postId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}/like`, {
+            const response = await fetch(`${API_BASE_URL}/posts/${postId}/like`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -143,7 +144,7 @@ const UserHome = () => {
     const handleDislike = async (postId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}/dislike`, {
+            const response = await fetch(`${API_BASE_URL}/posts/${postId}/dislike`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -165,7 +166,7 @@ const UserHome = () => {
     const handleComment = async (postId, commentText) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('https://qna-web-app.vercel.app/api/comments', {
+            const response = await fetch(`${API_BASE_URL}/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -196,7 +197,7 @@ const UserHome = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}`, {
+            const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -218,7 +219,7 @@ const UserHome = () => {
     const handleEditPost = async (postId, editData) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/posts/${postId}`, {
+            const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaComment, FaTrash, FaEdit } from 'react-icons/fa';
 import Comment from './Comment';
 import '../styles/PostCard.css';
+import { API_BASE_URL } from '../config/api';
 
 const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, activeTab, onRefresh }) => {
     const [showCommentInput, setShowCommentInput] = useState(false);
@@ -37,7 +38,7 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
     const handleCommentLike = async (commentId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/comments/${commentId}/like`, {
+            const response = await fetch(`${API_BASE_URL}/comments/${commentId}/like`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -57,7 +58,7 @@ const PostCard = ({ post, onLike, onDislike, onComment, onDelete, onEdit, active
     const handleCommentDislike = async (commentId) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`https://qna-web-app.vercel.app/api/comments/${commentId}/dislike`, {
+            const response = await fetch(`${API_BASE_URL}/comments/${commentId}/dislike`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaChartBar } from 'react-icons/fa';
 import '../styles/AdminDashboard.css';
+import { API_BASE_URL } from '../config/api';
 
 const AdminDashboard = () => {
     const [pendingPosts, setPendingPosts] = useState([]);
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
 
     const fetchPendingPosts = async () => {
         try {
-            const response = await fetch('/api/admin/pending-posts', {
+            const response = await fetch(`${API_BASE_URL}/admin/pending-posts`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -33,7 +34,7 @@ const AdminDashboard = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch('/api/admin/stats', {
+            const response = await fetch(`${API_BASE_URL}/admin/stats`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -47,7 +48,7 @@ const AdminDashboard = () => {
 
     const handlePostAction = async (postId, action) => {
         try {
-            await fetch(`/api/admin/posts/${postId}/status`, {
+            await fetch(`${API_BASE_URL}/admin/posts/${postId}/status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

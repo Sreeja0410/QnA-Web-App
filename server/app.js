@@ -20,7 +20,10 @@ const app = express();
 // Middleware
 app.use(cors({
     origin: ["https://qna-web-app-client.vercel.app"],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    exposedHeaders: ['Access-Control-Allow-Origin']
 }));
 app.use(express.json());
 
@@ -29,7 +32,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/posts', authMiddleware, require('./routes/posts'));
 app.use('/api/comments', authMiddleware, require('./routes/comments'));
 app.use('/api/admin', authMiddleware, require('./routes/admin'));
-app.use('/api/comments',require('./routes/comments'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

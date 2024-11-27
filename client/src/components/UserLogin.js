@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaExclamationCircle } from 'react-icons/fa';
 import '../styles/Auth.css';
+import { API_BASE_URL } from '../config/api';
 
 const UserLogin = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const UserLogin = () => {
         setError('');
 
         try {
-            const response = await fetch('https://qna-web-app.vercel.app/api/auth/login', {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
